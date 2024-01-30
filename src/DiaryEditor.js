@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useRef,useState } from "react";
+// useRef는 html을 조작하게 해주는 메서드, useState는 상태변화를 전달해 주는 메서드
 
 const DiaryEdiror = () => {
+  // useRef react 메서드를 적용시키고 싶은 상수에 값을 할당!
+  const authorInput = useRef();
+  const contentInput = useRef();
+
   const [state, setState] = useState({
     author: "",
     content: "",
@@ -16,7 +21,19 @@ const DiaryEdiror = () => {
   }
 
   const handleSubmit = () => {
-    console.log(state);
+    if(state.author.length < 1) {
+      authorInput.current.focus();
+      // focus
+      return;
+    }
+
+    if(state.content.length < 5) {
+      contentInput.current.focus();
+      // focus
+      return;
+    }
+    // 특정 조건에 도달하지 못한 입력일 경우 useRef를 이용해서 html dom을 조작하는 코드
+
     alert('저장 성공')
 
   }
@@ -26,6 +43,7 @@ const DiaryEdiror = () => {
       <h2>오늘의 일기</h2>
       <div>
         <input
+          ref = {authorInput}
           value={state.author}
           name="author"
           onChange={handleChangeState}
@@ -33,6 +51,7 @@ const DiaryEdiror = () => {
       </div>
       <div>
         <textarea
+          ref={contentInput}
           name="content"
           value={state.content}
           onChange={
