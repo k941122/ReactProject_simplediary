@@ -1,7 +1,7 @@
 import { useRef,useState } from "react";
 // useRef는 html을 조작하게 해주는 메서드, useState는 상태변화를 전달해 주는 메서드
 
-const DiaryEdiror = () => {
+const DiaryEdiror = ({onCreate}) => {
   // useRef react 메서드를 적용시키고 싶은 상수에 값을 할당!
   const authorInput = useRef();
   const contentInput = useRef();
@@ -34,7 +34,22 @@ const DiaryEdiror = () => {
     }
     // 특정 조건에 도달하지 못한 입력일 경우 useRef를 이용해서 html dom을 조작하는 코드
 
+    onCreate(state.author, state.content, state.emotion);
+    /**
+     * handleSubmit 함수에서 if 조건문을 통과한 글만 
+     * App.js 에서 props로 받아온 onCreate를 이용해서 state로 상태를 전달해 준다.
+    */
+
     alert('저장 성공')
+    setState({
+      author: '',
+      content: '',
+      emotion: 1,
+    });
+    /**
+     * 저장이 성공한뒤 setState를 통해 기본적인 author, content,emotion을 초기화 시킨다.
+     */
+
 
   }
 
