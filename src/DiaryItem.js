@@ -1,5 +1,5 @@
 const DiaryItem = ({
-    onDelete,
+    onRemove,
     author, 
     content, 
     created_date, 
@@ -17,7 +17,7 @@ const DiaryItem = ({
         <button onClick={()=>{
             console.log(id)
             if(window.confirm(`${id}번째 일기를 정말 삭제하시겠습니까?`)) {
-                onDelete(id);
+                onRemove(id);
             }}}
             >Delete</button>
     </div>
